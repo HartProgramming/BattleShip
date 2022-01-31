@@ -46,10 +46,59 @@ function loc2Vertical(){
 }
 loc2Vertical();
 
+function loc3Vertical(loc3random){
+    if(loc3random % 5 === 0 && loc3random !== 5 || 10){
+        let a = loc3random -5;
+        let b = loc3random -10;
+        return [a, b];
+      
+    }else if(loc2random > 20 && loc2random < 25){
+        a = loc3random -5
+        b = loc3random - 10;
+        return [a, b];
+    }else if(loc2random === 5){
+        a = loc3random + 5;
+        b = loc3random + 10;
+        return [a, b];
+    }else{
+        a = loc3random + 5;
+        b = loc3random + 10;
+        return [a, b];
+    }
+
+}
+
+/* Function that generates a random position for a ship size of 3 - Horizontal */
+function loc3Horizontal(loc3random){
+    if(loc3random % 5 === 0){
+        let c = loc3random -1;
+        let d = loc3random -2;
+        return [c, d];
+      
+    }else if(loc3random === 1 || 6 || 11 || 16 || 21){
+        c = loc3random + 1;
+        d = loc3random + 2;
+        return [c, d];
+    }else{
+        c = loc3random + 1;
+        d = loc3random - 1;
+        return [c, d];
+    }
+    
+
+}
+
+
+const size3Vert = loc3Vertical(loc3random);
+let a = size3Vert[0];
+let b = size3Vert[1];
 
 let loc2Array = [loc2Horizontal(), loc2Vertical()]
 let loc2ArrayRandom = Math.floor(Math.random() * 2);
-console.log(loc2Array[loc2ArrayRandom])
+
+let loc3Array = [loc3Horizontal(), loc3Vertical()];
+let loc3ArrayRandom = Math.floor(Math.random() * 2);
+console.log(loc3rray[loc3ArrayRandom])
 for(let btns of square){
     btns.addEventListener("click",function(){
         if(parseInt(btns.textContent) == loc1random){
@@ -61,7 +110,19 @@ for(let btns of square){
             if(parseInt(btns.textContent) == loc2random|| parseInt(btns.textContent) == loc2Array[loc2ArrayRandom]){
             btns.classList.add("hit2");
             btns.classList.toggle("visible");
-        }}else{
+        }
+    }   else if(parseInt(btns.textContent) == loc3random || parseInt(btns.textContent) == loc3Array[loc3ArrayRandom]){
+            btns.classList.add("hit3");
+            btns.classList.toggle("visible")
+            if(parseInt(btns.textContent) == loc3random || parseInt(btns.textContent) == loc3Array[loc3ArrayRandom]){
+                btns.classList.add("hit3");
+                btns.classList.toggle("visible");
+            }else if(parseInt(btns.textContent) == loc3random || parseInt(btns.textContent) == loc3Array[loc3ArrayRandom]){
+                btns.classList.add("hit3");
+                btns.classList.toggle("visible");
+            }
+        }
+        else{
             btns.classList.add("miss");
             btns.classList.toggle("visible");
         }
