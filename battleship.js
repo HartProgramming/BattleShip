@@ -1,14 +1,32 @@
 /* Declare variables that interact with DOM and program itself */
 let square = document.querySelectorAll(".square");
-let location1 = 5;
-let location2 = 1 && 6;
-let location3 = 11 && 16 && 21;
 let guesses = 0;
 let hits = 0;
 
-let loc1random = Math.floor(Math.random() * 25) + 1;
-let loc2random = Math.floor(Math.random() * 25) + 1;
-let loc3random = Math.floor(Math.random() * 25) + 1;
+
+
+
+function floor(){
+    return Math.floor(Math.random() * 25) + 1;
+}
+
+let loc1random = floor();
+let loc2random = floor();
+let loc3random = floor();
+
+let firstRand = false;
+while(firstRand){
+    if(loc1random === loc2random || loc1random === loc3random || loc2random === loc3random){
+        loc1random = floor();
+        loc2random = floor();
+        loc3random = floor();
+    }else{
+        console.log(loc1random);
+        console.log(loc2random);
+        console.log(loc3random);
+        firstRand = true;
+    }
+}
 
 /* Function that finds a random position of a ship size of 2 - Horizontal */
 function loc2Horizontal(){
@@ -21,7 +39,7 @@ function loc2Horizontal(){
         return loc2H2;
     }
 }
-
+loc2Horizontal();
 
 /* Function that finds a random position of a ship size of 2 - Vertical */
 function loc2Vertical(){
@@ -40,32 +58,36 @@ function loc2Vertical(){
         return loc2V4;
     }
 }
-
+loc2Vertical();
 
 /* Vertical random function for size 3 */
 
-function loc3Vertical(loc3random){
-    if(loc3random % 5 === 0 && loc3random !== 5 || 10){
-        let a = loc3random -5;
-        let b = loc3random -10;
+function loc3Vertical(x){
+    if(x > 0 && x < 6){
+        let a = x + 5;
+        let b = x + 10;
         return [a, b];
       
-    }else if(loc3random > 20 && loc3random < 25){
+    }else if(x > 20 && x < 26){
         let a = loc3random -5
-        let b = loc3random - 10;
+        let b = x - 10;
         return [a, b];
-    }else if(loc3random === 5){
-        let a = loc3random + 5;
-        let b = loc3random + 10;
+    }else if(x > 15 && x < 21){
+        let a = x + 5;
+        let b = x - 5;
+        return [a, b];
+    }else if(x > 5 && x < 11){
+        let a = x + 5;
+        let b = x - 5;
         return [a, b];
     }else{
-        let a = loc3random + 5;
-        let b = loc3random + 10;
+        let a = x + 5;
+        let b = x - 5;
         return [a, b];
     }
 
 }
-
+loc3Vertical(loc3random);
 /* Function that generates a random position for a ship size of 3 - Horizontal */
 function loc3Horizontal(loc3random){
     if(loc3random % 5 === 0){
@@ -83,7 +105,7 @@ function loc3Horizontal(loc3random){
         return [c, d];
     }
 }
-
+loc3Horizontal(loc3random);
 
 /* Declare the size 3 Vertical function, assign it a variable, and assign results to variables*/
 const size3Vert = loc3Vertical(loc3random);
@@ -113,32 +135,12 @@ console.log(result1);
 /* Declaration of variables and while loop to check if initial random number is same
 if it is then change the random number*/
 
+let one = [loc1random];
+let two = [loc2random, loc2Array[loc2ArrayRandom]];
+let three = [loc3random, result0, result1];
 
-let random = false;
-let ships = false;
-function sortShips(){
-    if(random === false && ships === false){
-    while(random){
-        if(loc3random === loc2random || loc3random === loc1random){
-            loc3random = Math.floor(Math.random() * 25) +1;
-        else if(loc2random === loc1random){
-            loc2random = Math.floor(Math.random() * 25) +1;
-            }
-        }else if(loc2Array[loc2ArrayRandom] === loc1random || loc2Array[loc2ArrayRandom] === loc3random || loc2Array[loc2ArrayRandom] === result0 || loc2Array[loc2ArrayRandom] === result1){
-                    random = false;
-    }else if(result1 === loc1random || result1 === loc2random){
-                    random = false;
-    }           else if(result0 === loc1random || result0 === loc2random){
-                    random = false;
-}else{
-    ships = true;
-    random = true;
-}
-  }
-  }}
-sortShips();
-
-
+/*
+function button(){
 for(let btns of square){
     btns.addEventListener("click",function(){
         if(parseInt(btns.textContent) == loc1random){
@@ -168,10 +170,9 @@ for(let btns of square){
         }
     })
 }
+}
     
-let one = [loc1random];
-let two = [loc2random, loc2Array[loc2ArrayRandom]];
-let three = [loc3random, result0, result1];
+*/
 
 
 console.log(one);
