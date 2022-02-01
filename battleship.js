@@ -14,51 +14,37 @@ let loc1random = floor();
 let loc2random = floor();
 let loc3random = floor();
 
-let firstRand = false;
-while(firstRand){
-    if(loc1random === loc2random || loc1random === loc3random || loc2random === loc3random){
-        loc1random = floor();
-        loc2random = floor();
-        loc3random = floor();
-    }else{
-        console.log(loc1random);
-        console.log(loc2random);
-        console.log(loc3random);
-        firstRand = true;
-    }
-}
-
 /* Function that finds a random position of a ship size of 2 - Horizontal */
-function loc2Horizontal(){
-    if(loc2random % 5 === 0){
-       loc2H1 = loc2random -1
+function loc2Horizontal(z){
+    if(z % 5 === 0){
+       loc2H1 = z -1
        return loc2H1;
       
     }else{
-        loc2H2 = loc2random + 1;
+        loc2H2 = z + 1;
         return loc2H2;
     }
 }
-loc2Horizontal();
+
 
 /* Function that finds a random position of a ship size of 2 - Vertical */
-function loc2Vertical(){
-    if(loc2random % 5 === 0 && loc2random !== 5){
-        loc2V1 = loc2random -5;
+function loc2Vertical(w){
+    if(w % 5 === 0 && w !== 5){
+        loc2V1 = w -5;
         return loc2V1;
       
-    }else if(loc2random > 20 && loc2random < 25){
-        loc2V2 = loc2random - 5;
+    }else if(w > 20 && w < 25){
+        loc2V2 = w - 5;
         return loc2V2;
-    }else if(loc2random === 5){
-        loc2V3 = loc2random + 5;
+    }else if(w === 5){
+        loc2V3 = w + 5;
         return loc2V3;
     }else{
-        loc2V4 = loc2random + 5;
+        loc2V4 = w + 5;
         return loc2V4;
     }
 }
-loc2Vertical();
+
 
 /* Vertical random function for size 3 */
 
@@ -87,25 +73,25 @@ function loc3Vertical(x){
     }
 
 }
-loc3Vertical(loc3random);
+
 /* Function that generates a random position for a ship size of 3 - Horizontal */
-function loc3Horizontal(loc3random){
-    if(loc3random % 5 === 0){
-        let c = loc3random -1;
-        let d = loc3random -2;
+function loc3Horizontal(p){
+    if(p % 5 === 0){
+        let c = p -1;
+        let d = p -2;
         return [c, d];
       
-    }else if(loc3random === 1 || loc3random === 6 || loc3random === 11 || loc3random === 16 || loc3random === 21){
-        let c = loc3random + 1;
-        let d = loc3random + 2;
+    }else if(p === 1 || p === 6 || p === 11 || p === 16 || p === 21){
+        let c = p + 1;
+        let d = p + 2;
         return [c, d];
     }else{
-        let c = loc3random + 1;
-        let d = loc3random - 1;
+        let c = p + 1;
+        let d = p - 1;
         return [c, d];
     }
 }
-loc3Horizontal(loc3random);
+
 
 /* Declare the size 3 Vertical function, assign it a variable, and assign results to variables*/
 const size3Vert = loc3Vertical(loc3random);
@@ -118,7 +104,7 @@ let c = size3Hor[0];
 let d = size3Hor[1];
 
 /* Randomize the size 2 into an array */
-const loc2Array = [loc2Horizontal(), loc2Vertical()];
+let loc2Array = [loc2Horizontal(loc2random), loc2Vertical(loc2random)];
 let loc2ArrayRandom = Math.floor(Math.random() * 2);
 
 /* Randomize the size 3 into an array */
@@ -138,6 +124,22 @@ if it is then change the random number*/
 let one = [loc1random];
 let two = [loc2random, loc2Array[loc2ArrayRandom]];
 let three = [loc3random, result0, result1];
+
+let random = false;
+
+while(random){
+    if(three.includes(loc2random) || three.includes(loc2Array[loc2ArrayRandom]) || three.includes(loc1random) || two.includes(loc1random)){
+loc2Horizontal(loc2random);
+    loc2Vertical(loc2random);
+    loc3Horizontal(loc3random);
+    loc3Vertical(loc3random);
+    }else if(!three.includes(loc2random) && !three.includes(loc2Array[loc2ArrayRandom]) && !three.includes(loc1random) && !two.includes(loc1random) ){
+        random = true
+        break
+    }
+}
+
+
 
 /*
 function button(){
