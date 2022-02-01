@@ -5,10 +5,6 @@ let location2 = 1 && 6;
 let location3 = 11 && 16 && 21;
 let guesses = 0;
 let hits = 0;
-let play = false;
-let loc25One;
-let loc25Two;
-let loc21;
 
 let loc1random = Math.floor(Math.random() * 25) + 1;
 let loc2random = Math.floor(Math.random() * 25) + 1;
@@ -25,7 +21,7 @@ function loc2Horizontal(){
         return loc2H2;
     }
 }
-loc2Horizontal();
+
 
 /* Function that finds a random position of a ship size of 2 - Vertical */
 function loc2Vertical(){
@@ -44,7 +40,9 @@ function loc2Vertical(){
         return loc2V4;
     }
 }
-loc2Vertical();
+
+
+/* Vertical random function for size 3 */
 
 function loc3Vertical(loc3random){
     if(loc3random % 5 === 0 && loc3random !== 5 || 10){
@@ -52,17 +50,17 @@ function loc3Vertical(loc3random){
         let b = loc3random -10;
         return [a, b];
       
-    }else if(loc2random > 20 && loc2random < 25){
-        a = loc3random -5
-        b = loc3random - 10;
+    }else if(loc3random > 20 && loc3random < 25){
+        let a = loc3random -5
+        let b = loc3random - 10;
         return [a, b];
-    }else if(loc2random === 5){
-        a = loc3random + 5;
-        b = loc3random + 10;
+    }else if(loc3random === 5){
+        let a = loc3random + 5;
+        let b = loc3random + 10;
         return [a, b];
     }else{
-        a = loc3random + 5;
-        b = loc3random + 10;
+        let a = loc3random + 5;
+        let b = loc3random + 10;
         return [a, b];
     }
 
@@ -75,30 +73,72 @@ function loc3Horizontal(loc3random){
         let d = loc3random -2;
         return [c, d];
       
-    }else if(loc3random === 1 || 6 || 11 || 16 || 21){
-        c = loc3random + 1;
-        d = loc3random + 2;
+    }else if(loc3random === 1 || loc3random === 6 || loc3random === 11 || loc3random === 16 || loc3random === 21){
+        let c = loc3random + 1;
+        let d = loc3random + 2;
         return [c, d];
     }else{
-        c = loc3random + 1;
-        d = loc3random - 1;
+        let c = loc3random + 1;
+        let d = loc3random - 1;
         return [c, d];
     }
-    
-
 }
 
 
+/* Declare the size 3 Vertical function, assign it a variable, and assign results to variables*/
 const size3Vert = loc3Vertical(loc3random);
 let a = size3Vert[0];
 let b = size3Vert[1];
 
-let loc2Array = [loc2Horizontal(), loc2Vertical()]
+/* Declare the size 3 Horizontal function, assign it a variable, and assign results to variables*/
+const size3Hor = loc3Horizontal(loc3random);
+let c = size3Hor[0];
+let d = size3Hor[1];
+
+/* Randomize the size 2 into an array */
+const loc2Array = [loc2Horizontal(), loc2Vertical()];
 let loc2ArrayRandom = Math.floor(Math.random() * 2);
 
-let loc3Array = [loc3Horizontal(), loc3Vertical()];
+/* Randomize the size 3 into an array */
+let loc3Array = [loc3Horizontal(loc3random), loc3Vertical(loc3random)];
 let loc3ArrayRandom = Math.floor(Math.random() * 2);
-console.log(loc3rray[loc3ArrayRandom])
+let resultArray = loc3Array[loc3ArrayRandom];
+let result0 = resultArray[0];
+let result1 = resultArray[1];
+
+console.log(result0);
+console.log(result1);
+
+
+/* Declaration of variables and while loop to check if initial random number is same
+if it is then change the random number*/
+
+
+let random = false;
+let ships = false;
+function sortShips(){
+    if(random === false && ships === false){
+    while(random){
+        if(loc3random === loc2random || loc3random === loc1random){
+            loc3random = Math.floor(Math.random() * 25) +1;
+        else if(loc2random === loc1random){
+            loc2random = Math.floor(Math.random() * 25) +1;
+            }
+        }else if(loc2Array[loc2ArrayRandom] === loc1random || loc2Array[loc2ArrayRandom] === loc3random || loc2Array[loc2ArrayRandom] === result0 || loc2Array[loc2ArrayRandom] === result1){
+                    random = false;
+    }else if(result1 === loc1random || result1 === loc2random){
+                    random = false;
+    }           else if(result0 === loc1random || result0 === loc2random){
+                    random = false;
+}else{
+    ships = true;
+    random = true;
+}
+  }
+  }}
+sortShips();
+
+
 for(let btns of square){
     btns.addEventListener("click",function(){
         if(parseInt(btns.textContent) == loc1random){
@@ -111,13 +151,13 @@ for(let btns of square){
             btns.classList.add("hit2");
             btns.classList.toggle("visible");
         }
-    }   else if(parseInt(btns.textContent) == loc3random || parseInt(btns.textContent) == loc3Array[loc3ArrayRandom]){
+    }   else if(parseInt(btns.textContent) == loc3random || parseInt(btns.textContent) === result0 || parseInt(btns.textContent) === result1){
             btns.classList.add("hit3");
             btns.classList.toggle("visible")
-            if(parseInt(btns.textContent) == loc3random || parseInt(btns.textContent) == loc3Array[loc3ArrayRandom]){
+            if(parseInt(btns.textContent) == loc3random || parseInt(btns.textContent) === result0 || parseInt(btns.textContent) === result1){
                 btns.classList.add("hit3");
                 btns.classList.toggle("visible");
-            }else if(parseInt(btns.textContent) == loc3random || parseInt(btns.textContent) == loc3Array[loc3ArrayRandom]){
+            }else if(parseInt(btns.textContent) == loc3random || parseInt(btns.textContent) === result0 || parseInt(btns.textContent) === result1){
                 btns.classList.add("hit3");
                 btns.classList.toggle("visible");
             }
@@ -129,6 +169,11 @@ for(let btns of square){
     })
 }
     
+let one = [loc1random];
+let two = [loc2random, loc2Array[loc2ArrayRandom]];
+let three = [loc3random, result0, result1];
 
 
-    
+console.log(one);
+console.log(two);
+console.log(three);
