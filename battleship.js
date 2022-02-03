@@ -1,9 +1,17 @@
 /* Declare variables that interact with DOM and program itself */
-let square = document.querySelectorAll(".square");
+let start = document.querySelectorAll(".start");
 let guesses = 0;
 let hits = 0;
+let newGame = document.querySelector("#newgame");
 
+function colorReset(){
+for(let begin of start){
+    begin.classList.add("square");
+    begin.classList.toggle("visible");
+}
+}
 
+colorReset();
 
 
 function floor(){
@@ -125,58 +133,96 @@ let one = [loc1random];
 let two = [loc2random, loc2Array[loc2ArrayRandom]];
 let three = [loc3random, result0, result1];
 
-let random = false;
 
-while(random){
-    if(three.includes(loc2random) || three.includes(loc2Array[loc2ArrayRandom]) || three.includes(loc1random) || two.includes(loc1random)){
-loc2Horizontal(loc2random);
-    loc2Vertical(loc2random);
-    loc3Horizontal(loc3random);
-    loc3Vertical(loc3random);
-    }else if(!three.includes(loc2random) && !three.includes(loc2Array[loc2ArrayRandom]) && !three.includes(loc1random) && !two.includes(loc1random) ){
-        random = true
-        break
+function startGame(){
+    newGame.addEventListener("click", function(){
+        colorReset();
+        let random = true;
+        while(random){
+            loc1random = floor();
+            loc2random = floor();
+            loc3random = floor();
+            loc2Horizontal(loc2random);
+            loc2Vertical(loc2random);
+            loc3Horizontal(loc3random);
+            loc3Vertical(loc3random);
+            /* Declare the size 3 Vertical function, assign it a variable, and assign results to variables*/
+            let size3Vert = loc3Vertical(loc3random);
+            let a = size3Vert[0];
+            let b = size3Vert[1];
+
+            /* Declare the size 3 Horizontal function, assign it a variable, and assign results to variables*/
+            let size3Hor = loc3Horizontal(loc3random);
+            let c = size3Hor[0];
+            let d = size3Hor[1];
+
+            /* Randomize the size 2 into an array */
+            let loc2Array = [loc2Horizontal(loc2random), loc2Vertical(loc2random)];
+            let loc2ArrayRandom = Math.floor(Math.random() * 2);
+
+            /* Randomize the size 3 into an array */
+            let loc3Array = [loc3Horizontal(loc3random), loc3Vertical(loc3random)];
+            let loc3ArrayRandom = Math.floor(Math.random() * 2);
+            let resultArray = loc3Array[loc3ArrayRandom];
+            let result0 = resultArray[0];
+            let result1 = resultArray[1];
+            /* Declaration of variables and while loop to check if initial random number is same
+            if it is then change the random number*/
+
+            
+            let two = [loc2random, loc2Array[loc2ArrayRandom]];
+            let three = [loc3random, result0, result1];
+            if(!three.includes(loc2random) && !three.includes(loc2Array[loc2ArrayRandom]) && !three.includes(loc1random) && !two.includes(loc1random)){
+                console.log(loc1random);
+                console.log(two);
+                console.log(three);
+                random = false;
+            }
+            button();
+        }       
+    })
+}
+
+
+
+
+
+
+
+
+/* Button function to interact with grid */
+
+function button(){ 
+    for(let btns of start){
+        btns.addEventListener("click",function(){
+            if(parseInt(btns.textContent) == loc1random){
+                btns.classList.add("hit1")
+                btns.classList.toggle("visible")
+            }else if(parseInt(btns.textContent) == loc2random || parseInt(btns.textContent) == loc2Array[loc2ArrayRandom]){
+                btns.classList.add("hit2");
+                btns.classList.toggle("visible");
+                if(parseInt(btns.textContent) == loc2random|| parseInt(btns.textContent) == loc2Array[loc2ArrayRandom]){
+                btns.classList.add("hit2");
+                btns.classList.toggle("visible");
+            }
+        }   else if(parseInt(btns.textContent) == loc3random || parseInt(btns.textContent) === result0 || parseInt(btns.textContent) === result1){
+                btns.classList.add("hit3");
+                btns.classList.toggle("visible")
+                if(parseInt(btns.textContent) == loc3random || parseInt(btns.textContent) === result0 || parseInt(btns.textContent) === result1){
+                    btns.classList.add("hit3");
+                    btns.classList.toggle("visible");
+                }else if(parseInt(btns.textContent) == loc3random || parseInt(btns.textContent) === result0 || parseInt(btns.textContent) === result1){
+                    btns.classList.add("hit3");
+                    btns.classList.toggle("visible");
+                }
+            }
+            else{
+                btns.classList.add("miss");
+                btns.classList.toggle("visible");
+            }
+        })
     }
 }
 
 
-
-/*
-function button(){
-for(let btns of square){
-    btns.addEventListener("click",function(){
-        if(parseInt(btns.textContent) == loc1random){
-            btns.classList.add("hit1")
-            btns.classList.toggle("visible")
-        }else if(parseInt(btns.textContent) == loc2random || parseInt(btns.textContent) == loc2Array[loc2ArrayRandom]){
-            btns.classList.add("hit2");
-            btns.classList.toggle("visible");
-            if(parseInt(btns.textContent) == loc2random|| parseInt(btns.textContent) == loc2Array[loc2ArrayRandom]){
-            btns.classList.add("hit2");
-            btns.classList.toggle("visible");
-        }
-    }   else if(parseInt(btns.textContent) == loc3random || parseInt(btns.textContent) === result0 || parseInt(btns.textContent) === result1){
-            btns.classList.add("hit3");
-            btns.classList.toggle("visible")
-            if(parseInt(btns.textContent) == loc3random || parseInt(btns.textContent) === result0 || parseInt(btns.textContent) === result1){
-                btns.classList.add("hit3");
-                btns.classList.toggle("visible");
-            }else if(parseInt(btns.textContent) == loc3random || parseInt(btns.textContent) === result0 || parseInt(btns.textContent) === result1){
-                btns.classList.add("hit3");
-                btns.classList.toggle("visible");
-            }
-        }
-        else{
-            btns.classList.add("miss");
-            btns.classList.toggle("visible");
-        }
-    })
-}
-}
-    
-*/
-
-
-console.log(one);
-console.log(two);
-console.log(three);
+startGame();
