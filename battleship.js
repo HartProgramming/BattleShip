@@ -2,6 +2,9 @@
 let start = document.querySelectorAll(".start");
 let guesses = 0;
 let hits = 0;
+const head = document.querySelector("#status");
+let misses = document.querySelector("#misses");
+let ammo = document.querySelector("#ammo");
 let newGame = document.querySelector("#newgame");
 
 function colorReset(){
@@ -176,53 +179,64 @@ function startGame(){
                 console.log(loc1random);
                 console.log(two);
                 console.log(three);
-                random = false;
-            }
-            button();
-        }       
-    })
-}
+                /* Button function to interact with grid */
 
 
-
-
-
-
-
-
-/* Button function to interact with grid */
-
-function button(){ 
     for(let btns of start){
         btns.addEventListener("click",function(){
+            let head = document.querySelector("#status")
+            head.textContent 
             if(parseInt(btns.textContent) == loc1random){
-                btns.classList.add("hit1")
-                btns.classList.toggle("visible")
+                btns.classList.add("hit1");
+                btns.classList.toggle("visible");
+                head.textContent = "HIT!";
             }else if(parseInt(btns.textContent) == loc2random || parseInt(btns.textContent) == loc2Array[loc2ArrayRandom]){
                 btns.classList.add("hit2");
                 btns.classList.toggle("visible");
+                head.textContent = "HIT!";
                 if(parseInt(btns.textContent) == loc2random|| parseInt(btns.textContent) == loc2Array[loc2ArrayRandom]){
                 btns.classList.add("hit2");
                 btns.classList.toggle("visible");
+                head.textContent = "HIT!"
             }
         }   else if(parseInt(btns.textContent) == loc3random || parseInt(btns.textContent) === result0 || parseInt(btns.textContent) === result1){
                 btns.classList.add("hit3");
                 btns.classList.toggle("visible")
+                head.textContent = "HIT!"
                 if(parseInt(btns.textContent) == loc3random || parseInt(btns.textContent) === result0 || parseInt(btns.textContent) === result1){
                     btns.classList.add("hit3");
                     btns.classList.toggle("visible");
+                    head.textContent = "HIT!"
                 }else if(parseInt(btns.textContent) == loc3random || parseInt(btns.textContent) === result0 || parseInt(btns.textContent) === result1){
                     btns.classList.add("hit3");
                     btns.classList.toggle("visible");
+                    head.textContent = "HIT!"
                 }
             }
             else{
                 btns.classList.add("miss");
                 btns.classList.toggle("visible");
+                head.textContent = "MISS!";
             }
         })
     }
+                random = false;
+            }
+        }
+    })
 }
+
+           
+
+
+
+
+
+
+
+
+
+
 
 
 startGame();
