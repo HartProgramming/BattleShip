@@ -4,7 +4,7 @@ let head = document.querySelector("#status");
 let misses = document.querySelector("#misses");
 let ammo = document.querySelector("#ammo");
 let newGame = document.querySelector("#newgame");
-
+let gameOver = document.querySelector("#gameover");
 function floor(){
     return Math.floor(Math.random() * 25) + 1;
 }
@@ -140,9 +140,10 @@ function startGame(){
             /* Button function to interact with grid */   
     for(let btns of start){
         btns.addEventListener("click",function(){
-            let head = document.querySelector("#status")
+            
+            let head = document.querySelector("#status");
             head.textContent 
-            if(parseInt(btns.textContent) === loc1random){
+            if(btns.name("value") == loc1random){
                 btns.classList.add("hit1");
                 head.textContent = "HIT!";
             }else if(two.includes(parseInt(btns.textContent))){
@@ -151,9 +152,11 @@ function startGame(){
             }else if(three.includes(parseInt(btns.textContent))){
                 btns.classList.add("hit3");
                 head.textContent = "HIT!"
+                
             }else{
                 btns.classList.add("miss");
                 head.textContent = "MISS!";
+                
             }
         })
     }
@@ -162,6 +165,16 @@ function startGame(){
         }
     
 }
+
+let guess = 10;
+function guesses(){
+    guess = guess - 1;
+    ammo.textContent = guess;
+    if(guess === 0){
+        gameOver.textContent = "GAME OVER";
+    }
+}
+
 
            
 
