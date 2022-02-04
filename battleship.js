@@ -1,29 +1,17 @@
 /* Declare variables that interact with DOM and program itself */
 let start = document.querySelectorAll(".start");
-let guesses = 0;
-let hits = 0;
-const head = document.querySelector("#status");
+let head = document.querySelector("#status");
 let misses = document.querySelector("#misses");
 let ammo = document.querySelector("#ammo");
 let newGame = document.querySelector("#newgame");
-
-function colorReset(){
-for(let begin of start){
-    begin.classList.add("square");
-    begin.classList.toggle("visible");
-}
-}
-
-colorReset();
-
 
 function floor(){
     return Math.floor(Math.random() * 25) + 1;
 }
 
-let loc1random = floor();
-let loc2random = floor();
-let loc3random = floor();
+let loc1random;
+let loc2random;
+let loc3random;
 
 /* Function that finds a random position of a ship size of 2 - Horizontal */
 function loc2Horizontal(z){
@@ -103,66 +91,38 @@ function loc3Horizontal(p){
     }
 }
 
+/* Resets board at start of game */
 
-/* Declare the size 3 Vertical function, assign it a variable, and assign results to variables*/
-const size3Vert = loc3Vertical(loc3random);
-let a = size3Vert[0];
-let b = size3Vert[1];
+function colorReset() {
+    for (let begin of start) {
+        begin.classList.add("square");
+        begin.classList.remove("hit1");
+        begin.classList.remove("hit2");
+        begin.classList.remove("hit3");
+        begin.classList.remove("miss");
+    }
+}
+colorReset()
 
-/* Declare the size 3 Horizontal function, assign it a variable, and assign results to variables*/
-const size3Hor = loc3Horizontal(loc3random);
-let c = size3Hor[0];
-let d = size3Hor[1];
-
-/* Randomize the size 2 into an array */
-let loc2Array = [loc2Horizontal(loc2random), loc2Vertical(loc2random)];
-let loc2ArrayRandom = Math.floor(Math.random() * 2);
-
-/* Randomize the size 3 into an array */
-let loc3Array = [loc3Horizontal(loc3random), loc3Vertical(loc3random)];
-let loc3ArrayRandom = Math.floor(Math.random() * 2);
-let resultArray = loc3Array[loc3ArrayRandom];
-let result0 = resultArray[0];
-let result1 = resultArray[1];
-
-console.log(result0);
-console.log(result1);
-
-
-/* Declaration of variables and while loop to check if initial random number is same
-if it is then change the random number*/
-
-let one = [loc1random];
-let two = [loc2random, loc2Array[loc2ArrayRandom]];
-let three = [loc3random, result0, result1];
-
-
+/* When New Game is clicked the page refreshes. Starts game, resets colors, places ships randomly, initiates button click */
 function startGame(){
-    newGame.addEventListener("click", function(){
         colorReset();
         let random = true;
         while(random){
             loc1random = floor();
             loc2random = floor();
             loc3random = floor();
-            loc2Horizontal(loc2random);
-            loc2Vertical(loc2random);
-            loc3Horizontal(loc3random);
-            loc3Vertical(loc3random);
             /* Declare the size 3 Vertical function, assign it a variable, and assign results to variables*/
             let size3Vert = loc3Vertical(loc3random);
-            let a = size3Vert[0];
-            let b = size3Vert[1];
-
+            a = size3Vert[0];
+            b = size3Vert[1];
             /* Declare the size 3 Horizontal function, assign it a variable, and assign results to variables*/
             let size3Hor = loc3Horizontal(loc3random);
-            let c = size3Hor[0];
-            let d = size3Hor[1];
-
+            c = size3Hor[0];
+            d = size3Hor[1];
             /* Randomize the size 2 into an array */
             let loc2Array = [loc2Horizontal(loc2random), loc2Vertical(loc2random)];
             let loc2ArrayRandom = Math.floor(Math.random() * 2);
-
             /* Randomize the size 3 into an array */
             let loc3Array = [loc3Horizontal(loc3random), loc3Vertical(loc3random)];
             let loc3ArrayRandom = Math.floor(Math.random() * 2);
@@ -171,59 +131,36 @@ function startGame(){
             let result1 = resultArray[1];
             /* Declaration of variables and while loop to check if initial random number is same
             if it is then change the random number*/
-
-            
             let two = [loc2random, loc2Array[loc2ArrayRandom]];
             let three = [loc3random, result0, result1];
             if(!three.includes(loc2random) && !three.includes(loc2Array[loc2ArrayRandom]) && !three.includes(loc1random) && !two.includes(loc1random)){
-                console.log(loc1random);
-                console.log(two);
-                console.log(three);
-                /* Button function to interact with grid */
-
-
+                console.log(loc1random)
+                console.log(two)
+                console.log(three)
+            /* Button function to interact with grid */   
     for(let btns of start){
         btns.addEventListener("click",function(){
             let head = document.querySelector("#status")
             head.textContent 
-            if(parseInt(btns.textContent) == loc1random){
+            if(parseInt(btns.textContent) === loc1random){
                 btns.classList.add("hit1");
-                btns.classList.toggle("visible");
                 head.textContent = "HIT!";
-            }else if(parseInt(btns.textContent) == loc2random || parseInt(btns.textContent) == loc2Array[loc2ArrayRandom]){
+            }else if(two.includes(parseInt(btns.textContent))){
                 btns.classList.add("hit2");
-                btns.classList.toggle("visible");
                 head.textContent = "HIT!";
-                if(parseInt(btns.textContent) == loc2random|| parseInt(btns.textContent) == loc2Array[loc2ArrayRandom]){
-                btns.classList.add("hit2");
-                btns.classList.toggle("visible");
-                head.textContent = "HIT!"
-            }
-        }   else if(parseInt(btns.textContent) == loc3random || parseInt(btns.textContent) === result0 || parseInt(btns.textContent) === result1){
+            }else if(three.includes(parseInt(btns.textContent))){
                 btns.classList.add("hit3");
-                btns.classList.toggle("visible")
                 head.textContent = "HIT!"
-                if(parseInt(btns.textContent) == loc3random || parseInt(btns.textContent) === result0 || parseInt(btns.textContent) === result1){
-                    btns.classList.add("hit3");
-                    btns.classList.toggle("visible");
-                    head.textContent = "HIT!"
-                }else if(parseInt(btns.textContent) == loc3random || parseInt(btns.textContent) === result0 || parseInt(btns.textContent) === result1){
-                    btns.classList.add("hit3");
-                    btns.classList.toggle("visible");
-                    head.textContent = "HIT!"
-                }
-            }
-            else{
+            }else{
                 btns.classList.add("miss");
-                btns.classList.toggle("visible");
                 head.textContent = "MISS!";
             }
         })
     }
-                random = false;
+    random = false;   
             }
         }
-    })
+    
 }
 
            
