@@ -141,11 +141,21 @@ function startGame(){
                 console.log(two)
                 console.log(three)
             /* Button function to interact with grid */   
-    for(let btns of start){
+                let guess = 10;
+                let ammo = document.querySelector("#ammo");
+                let gameOver = document.querySelector("#gameover")
+                let hits = 0;
+                let miss = 0;
+                for(let btns of start){
         btns.addEventListener("click",function(){
-            
+            guess = guess -1;
+            ammo.textContent = guess;
             let head = document.querySelector("#status");
             head.textContent 
+            if(guess === 0){
+                btns.disabled = true;
+                gameOver.textContent = "GAME OVER!!!"
+            }
             if(parseInt(btns.value) == loc1random){
                 btns.classList.add("hit1");
                 head.textContent = "HIT!";
@@ -172,7 +182,7 @@ function startGame(){
 let hits = 0;
 let miss = 0;
 let guess = 10;
-
+/*
 function guesses(){
     
     let ammo = document.querySelector("#ammo");
@@ -193,6 +203,7 @@ function guesses(){
         disable();
     }
 }
+*/
 
 
 
