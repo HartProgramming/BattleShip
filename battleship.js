@@ -2,9 +2,7 @@
 let start = document.querySelectorAll(".start");
 let head = document.querySelector("#status");
 let misses = document.querySelector("#misses");
-let ammo = document.querySelector("#ammo");
 let newGame = document.querySelector("#newgame");
-let gameOver = document.querySelector("#gameover");
 function floor(){
     return Math.floor(Math.random() * 25) + 1;
 }
@@ -13,6 +11,11 @@ let loc1random;
 let loc2random;
 let loc3random;
 
+function disable() {
+    for (let x of start) {
+        x.disabled = true;
+    }
+}
 /* Function that finds a random position of a ship size of 2 - Horizontal */
 function loc2Horizontal(z){
     if(z % 5 === 0){
@@ -143,13 +146,13 @@ function startGame(){
             
             let head = document.querySelector("#status");
             head.textContent 
-            if(btns("data-value") == loc1random){
+            if(parseInt(btns.value) == loc1random){
                 btns.classList.add("hit1");
                 head.textContent = "HIT!";
-            }else if(two.includes(parseInt(btns.textContent))){
+            }else if(two.includes(parseInt(btns.value))){
                 btns.classList.add("hit2");
                 head.textContent = "HIT!";
-            }else if(three.includes(parseInt(btns.textContent))){
+            }else if(three.includes(parseInt(btns.value))){
                 btns.classList.add("hit3");
                 head.textContent = "HIT!"
                 
@@ -166,26 +169,30 @@ function startGame(){
     
 }
 
+let hits = 0;
+let miss = 0;
 let guess = 10;
+
 function guesses(){
+    
+    let ammo = document.querySelector("#ammo");
+    let gameOver = document.querySelector("#gameover")
     guess = guess - 1;
     ammo.textContent = guess;
-    if(guess === 0){
+    if(guess !== 0){
+       
+        console.log("fuck")
+        play = false;
+    }else if(guesses === 0){
         gameOver.textContent = "GAME OVER";
+        function disable() {
+            for (let x of start) {
+                x.disabled = true;
+            }
+        }
+        disable();
     }
 }
-
-
-           
-
-
-
-
-
-
-
-
-
 
 
 
