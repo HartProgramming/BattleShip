@@ -143,7 +143,7 @@ function startGame(){
             
             let head = document.querySelector("#status");
             head.textContent 
-            if(btns.name("value") == loc1random){
+            if(btns("data-value") == loc1random){
                 btns.classList.add("hit1");
                 head.textContent = "HIT!";
             }else if(two.includes(parseInt(btns.textContent))){
