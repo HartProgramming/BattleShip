@@ -217,7 +217,43 @@ function guesses(){
     }
 }
 */
-
+let clicks = 0;
+let shipClicks1 = 0;
+let shipClicks2 = 0;
+let shipClicks3 = 0;
+let firstShip = false;
+let secondShip = false;
+let thirdShip = false;
+for(let x of playerBoard){
+    let ship1 = document.querySelector(".ship.ship1");
+    ship1.addEventListener("click", function(){
+        ship1.classList.remove("ship1");
+        ship1.disabled = true;
+        firstShip = true;
+    })
+    let ship2 = document.querySelectorAll(".ship.ship2");
+    let ship2ID1 = document.querySelector("#ship2id1");
+    let ship2ID2 = document.querySelector("#ship2id2");
+    
+    for(let i of ship2) {
+        i.addEventListener("click", function(){
+            if(i === ship2ID1){
+                i.classList.remove("ship2")
+            }else if(i === ship2ID2){
+                i.classList.remove("ship2")
+            }
+        })
+    }
+        x.addEventListener("click", function(){
+            if(firstShip === true){
+                clicks += 1;
+                if(clicks ===1){
+            x.classList.add("ship1");
+            x.disabled = true;
+                }
+            }
+        })
+    }
 
 
 startGame();

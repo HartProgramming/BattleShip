@@ -34,10 +34,26 @@ section {
     font-size: 100px;
 }
 
-.reset{
-    height: 148x;
-    width: 148px;
-    background-color: rgb(57, 117, 57);
+.ship{
+  height: 50px;
+  width: 50px;
+}
+
+.ship1{
+    background-color: gray;
+    border: 1px solid rgb(66, 66, 117);
+    margin: 0;
+    font-size: 100px;
+}
+.ship2{
+    background-color: rgb(78, 74, 74);
+    border: 1px solid rgb(66, 66, 117);
+    margin: 0;
+    font-size: 100px;
+}
+
+.ship3{
+    background-color: rgb(36, 35, 35);
     border: 1px solid rgb(66, 66, 117);
     margin: 0;
     font-size: 100px;
