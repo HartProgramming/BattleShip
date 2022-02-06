@@ -110,7 +110,7 @@ function colorReset() {
         begin.classList.remove("hit3");
         begin.classList.remove("miss");
     }
-    for(let player of playerBoard){
+    for (let player of playerBoard) {
         player.classList.add("square");
         player.classList.remove("hit1");
         player.classList.remove("hit2");
@@ -217,6 +217,8 @@ function guesses(){
     }
 }
 */
+
+/* Declared variables for shipClicks which equates to one click for one spot on board*/
 let clicks = 0;
 let shipClicks1 = 0;
 let shipClicks2 = 0;
@@ -224,36 +226,73 @@ let shipClicks3 = 0;
 let firstShip = false;
 let secondShip = false;
 let thirdShip = false;
-for(let x of playerBoard){
+
+/* For loop that selects each square on the board when clicked, this determines the position
+of the player's ships */
+for (let x of playerBoard) {
     let ship1 = document.querySelector(".ship.ship1");
-    ship1.addEventListener("click", function(){
+    ship1.addEventListener("click", function () {
         ship1.classList.remove("ship1");
         ship1.disabled = true;
-        firstShip = true;
+        shipClicks1 = 1;
+        x.disabled = false;
     })
-    let ship2 = document.querySelectorAll(".ship.ship2");
-    let ship2ID1 = document.querySelector("#ship2id1");
-    let ship2ID2 = document.querySelector("#ship2id2");
-    
-    for(let i of ship2) {
-        i.addEventListener("click", function(){
-            if(i === ship2ID1){
-                i.classList.remove("ship2")
-            }else if(i === ship2ID2){
-                i.classList.remove("ship2")
-            }
-        })
-    }
-        x.addEventListener("click", function(){
-            if(firstShip === true){
-                clicks += 1;
-                if(clicks ===1){
+    let ship2 = document.querySelector(".ship.ship2");
+    ship2.addEventListener("click", function () {
+        ship2.classList.remove("ship2");
+        ship2.disabled = true;
+        shipClicks2 = 2;
+        x.disabled = false;
+    })
+    let ship3 = document.querySelector(".ship.ship3")
+    ship3.addEventListener("click", function () {
+        ship3.classList.remove("ship3");
+        shipClicks3 = 3;
+        ship3.disabled = true;
+        x.disabled = false;
+    })
+
+
+    x.addEventListener("click", function () {
+        if (shipClicks1 === 1) {
             x.classList.add("ship1");
-            x.disabled = true;
-                }
+            shipClicks1 -= 1;
+            
+             if (shipClicks1 === 0) {
+                x.disabled = true;
             }
-        })
-    }
+        } else if (shipClicks2 === 2) {
+            x.classList.add("ship2");
+            shipClicks2 -= 1;
+            x.disabled = false;
+        } else if (shipClicks2 == 1) {
+            x.disabled = false;
+            x.classList.add("ship2");
+            shipClicks2 -= 1;
+            if (shipClicks2 === 0) {
+                x.disabled = true;
+            }
+        } else if (shipClicks3 === 3) {
+            x.classList.add("ship3");
+            shipClicks3 -= 1;
+            x.disabled = false;
+        } else if (shipClicks3 === 2) {
+            x.classList.add("ship3");
+            shipClicks3 -= 1;
+            x.disabled = false;
+        } else if (shipClicks3 === 1) {
+            x.classList.add("ship3");
+            shipClicks3 -= 1;
+            x.disabled = false;
+            if (shipClicks3 === 0) {
+                x.disabled = true;
+            }
+        }
+    })
+}
+
+
+
 
 
 startGame();
