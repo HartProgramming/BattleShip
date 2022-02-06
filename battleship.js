@@ -4,6 +4,7 @@ let playerBoard = document.querySelectorAll(".playerboard");
 let head = document.querySelector("#status");
 let misses = document.querySelector("#misses");
 let newGame = document.querySelector("#newgame");
+let countDown = document.querySelector("#countdown");
 
 
 
@@ -252,21 +253,22 @@ for (let x of playerBoard) {
         x.disabled = false;
     })
 
-
     x.addEventListener("click", function () {
         if (shipClicks1 === 1) {
             x.classList.add("ship1");
             shipClicks1 -= 1;
-            
+            x.value;
              if (shipClicks1 === 0) {
                 x.disabled = true;
             }
         } else if (shipClicks2 === 2) {
             x.classList.add("ship2");
+            x.value
             shipClicks2 -= 1;
             x.disabled = false;
         } else if (shipClicks2 == 1) {
             x.disabled = false;
+            x.value
             x.classList.add("ship2");
             shipClicks2 -= 1;
             if (shipClicks2 === 0) {
@@ -275,10 +277,12 @@ for (let x of playerBoard) {
         } else if (shipClicks3 === 3) {
             x.classList.add("ship3");
             shipClicks3 -= 1;
+            x.value
             x.disabled = false;
         } else if (shipClicks3 === 2) {
             x.classList.add("ship3");
             shipClicks3 -= 1;
+            x.value
             x.disabled = false;
         } else if (shipClicks3 === 1) {
             x.classList.add("ship3");
@@ -294,5 +298,19 @@ for (let x of playerBoard) {
 
 
 
-
 startGame();
+
+/* Timer function for Cpu guess */
+let time = 3;
+function cpuTimer(){
+    function deduct() {
+        time = time - 1;
+        countDown.textContent = time;
+        if (time === 0) {
+            clearInterval(interval)
+        }
+    }
+let interval = setInterval(deduct, 1000)
+    
+}
+cpuTimer()
