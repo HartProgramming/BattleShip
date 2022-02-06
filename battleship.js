@@ -5,14 +5,15 @@ let head = document.querySelector("#status");
 let misses = document.querySelector("#misses");
 let newGame = document.querySelector("#newgame");
 let countDown = document.querySelector("#countdown");
-
-
+let timer;
+let time;
+let interval;
 
 /* Floor function calculates random position of cpu ships and shots fired*/
 function floor() {
     return Math.floor(Math.random() * 25) + 1;
 }
-
+let computerGuess;
 let loc1random;
 let loc2random;
 let loc3random;
@@ -193,32 +194,6 @@ function startGame() {
 
 }
 
-let hits = 0;
-let miss = 0;
-let guess = 10;
-/*
-function guesses(){
-    
-    let ammo = document.querySelector("#ammo");
-    let gameOver = document.querySelector("#gameover")
-    guess = guess - 1;
-    ammo.textContent = guess;
-    if(guess !== 0){
-       
-        console.log("fuck")
-        play = false;
-    }else if(guesses === 0){
-        gameOver.textContent = "GAME OVER";
-        function disable() {
-            for (let x of start) {
-                x.disabled = true;
-            }
-        }
-        disable();
-    }
-}
-*/
-
 /* Declared variables for shipClicks which equates to one click for one spot on board*/
 let clicks = 0;
 let shipClicks1 = 0;
@@ -252,65 +227,84 @@ for (let x of playerBoard) {
         ship3.disabled = true;
         x.disabled = false;
     })
-
-    x.addEventListener("click", function () {
-        if (shipClicks1 === 1) {
-            x.classList.add("ship1");
-            shipClicks1 -= 1;
-            x.value;
-             if (shipClicks1 === 0) {
-                x.disabled = true;
-            }
-        } else if (shipClicks2 === 2) {
-            x.classList.add("ship2");
-            x.value
-            shipClicks2 -= 1;
-            x.disabled = false;
-        } else if (shipClicks2 == 1) {
-            x.disabled = false;
-            x.value
-            x.classList.add("ship2");
-            shipClicks2 -= 1;
-            if (shipClicks2 === 0) {
-                x.disabled = true;
-            }
-        } else if (shipClicks3 === 3) {
-            x.classList.add("ship3");
-            shipClicks3 -= 1;
-            x.value
-            x.disabled = false;
-        } else if (shipClicks3 === 2) {
-            x.classList.add("ship3");
-            shipClicks3 -= 1;
-            x.value
-            x.disabled = false;
-        } else if (shipClicks3 === 1) {
-            x.classList.add("ship3");
-            shipClicks3 -= 1;
-            x.disabled = false;
-            if (shipClicks3 === 0) {
-                x.disabled = true;
-            }
+    function shipSetting(){
+    if (shipClicks1 === 1) {
+        x.classList.add("ship1");
+        shipClicks1 -= 1;
+        common = x.value;
+        if (shipClicks1 === 0) {
+            x.disabled = true;
         }
-    })
+    } else if (shipClicks2 === 2) {
+        x.classList.add("ship2");
+        x.value
+        shipClicks2 -= 1;
+        x.disabled = false;
+    } else if (shipClicks2 == 1) {
+        x.disabled = false;
+        x.value
+        x.classList.add("ship2");
+        shipClicks2 -= 1;
+        if (shipClicks2 === 0) {
+            x.disabled = true;
+        }
+    } else if (shipClicks3 === 3) {
+        x.classList.add("ship3");
+        shipClicks3 -= 1;
+        x.value
+        x.disabled = false;
+    } else if (shipClicks3 === 2) {
+        x.classList.add("ship3");
+        shipClicks3 -= 1;
+        x.value
+        x.disabled = false;
+    } else if (shipClicks3 === 1) {
+        x.classList.add("ship3");
+        shipClicks3 -= 1;
+        x.disabled = false;
+        if (shipClicks3 === 0) {
+            x.disabled = true;
+        }
+    }
 }
-
-
-
-
+    x.addEventListener("click", function () {
+        shipSetting()
+    })
+    function cpuGuess(){
+        shipSetting()
+        startTimer()
+        interval = setInterval(deduct, 1000)
+        if(timer === true){
+            console.log("hello")
+        }
+        computerGuess = floor()
+        console.log(computerGuess)
+    }
+}
+cpuGuess()
 startGame();
 
 /* Timer function for Cpu guess */
-let time = 3;
-function cpuTimer(){
+
     function deduct() {
+        timer = true;
         time = time - 1;
         countDown.textContent = time;
         if (time === 0) {
             clearInterval(interval)
+            timer = false;
         }
     }
-let interval = setInterval(deduct, 1000)
-    
-}
-cpuTimer()
+    function cpuTimer(){
+        time = 4;
+        deduct()
+    }
+    function startTimer(){
+        timer = true;
+        time;
+        cpuTimer()
+        if(time === 0){
+            console.log("fuck")
+        }
+    }
+
