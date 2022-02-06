@@ -10,41 +10,86 @@
 <body>
     
     <h1>Battleship</h1>
-    <h2 id="status">Status</h2>
-    <h2 id="gameover"></h2>
-    <h3>Misses: <span id="misses"></span></h3>
-    <h3>Hits: <span id="hits"></span></h3>
-    <h3>Ammo: <span id="ammo">10</span></h3>
-    
+        <h2 id="gameover"></h2>
     <button onClick="window.location.reload();" id="newgame">NEW GAME</button>
+
+    <h2 id="playerstatus">Status</h2>
+    <h3>Misses: <span id="playermisses"></span></h3>
+    <h3>Hits: <span id="playerhits"></span></h3>
+    <h3>Ammo: <span id="playerammo">10</span></h3>
+    <h2>Computer Board</h2>
     <section>
-        <button  class="start" value="1"></button>
-        <button  class="start" value="2"></button>
-        <button  class="start" value="3"></button>
-        <button  class="start" value="4"></button>
-        <button  class="start" value="5"></button>
-        <button  class="start" value="6"></button>
-        <button  class="start" value="7"></button>
-        <button  class="start" value="8"></button>
-        <button  class="start" value="9"></button>
-        <button  class="start" value="10"></button>
-        <button  class="start" value="11"></button>
-        <button  class="start" value="12"></button> 
-        <button  class="start" value="13"></button> 
-        <button  class="start" value="14"></button>
-        <button  class="start" value="15"></button>
-        <button  class="start" value="16"></button>
-        <button  class="start" value="17"></button> 
-        <button  class="start" value="18"></button> 
-        <button  class="start" value="19"></button>
-        <button  class="start" value="20"></button>
-        <button  class="start" value="21"></button> 
-        <button  class="start" value="22"></button> 
-        <button  class="start" value="23"></button> 
-        <button  class="start" value="24"></button> 
-        <button  class="start" value="25"></button> 
+        <button  class="cpuboard" value="1"></button>
+        <button  class="cpuboard" value="2"></button>
+        <button  class="cpuboard" value="3"></button>
+        <button  class="cpuboard" value="4"></button>
+        <button  class="cpuboard" value="5"></button>
+        <button  class="cpuboard" value="6"></button>
+        <button  class="cpuboard" value="7"></button>
+        <button  class="cpuboard" value="8"></button>
+        <button  class="cpuboard" value="9"></button>
+        <button  class="cpuboard" value="10"></button>
+        <button  class="cpuboard" value="11"></button>
+        <button  class="cpuboard" value="12"></button> 
+        <button  class="cpuboard" value="13"></button> 
+        <button  class="cpuboard" value="14"></button>
+        <button  class="cpuboard" value="15"></button>
+        <button  class="cpuboard" value="16"></button>
+        <button  class="cpuboard" value="17"></button> 
+        <button  class="cpuboard" value="18"></button> 
+        <button  class="cpuboard" value="19"></button>
+        <button  class="cpuboard" value="20"></button>
+        <button  class="cpuboard" value="21"></button> 
+        <button  class="cpuboard" value="22"></button> 
+        <button  class="cpuboard" value="23"></button> 
+        <button  class="cpuboard" value="24"></button> 
+        <button  class="cpuboard" value="25"></button> 
     </section>
 
+        <h2>Player Board</h2>
+        <h2 id="cpustatus">Status</h2>
+        <h3>Misses: <span id="cpumisses"></span></h3>
+        <h3>Hits: <span id="cpuhits"></span></h3>
+        <h3>Ammo: <span id="cpuammo">10</span></h3>
+        <h3>Ship 1</h3>
+        <div>
+
+        </div>
+        <h3>Ship 2</h3>
+        <div>
+
+        </div>
+        <h3>Ship 3</h3>
+        <div>
+            
+        </div>
+        <section>
+            <button class="playerboard" value="1"></button>
+            <button class="playerboard" value="2"></button>
+            <button class="playerboard" value="3"></button>
+            <button class="playerboard" value="4"></button>
+            <button class="playerboard" value="5"></button>
+            <button class="playerboard" value="6"></button>
+            <button class="playerboard" value="7"></button>
+            <button class="playerboard" value="8"></button>
+            <button class="playerboard" value="9"></button>
+            <button class="playerboard" value="10"></button>
+            <button class="playerboard" value="11"></button>
+            <button class="playerboard" value="12"></button>
+            <button class="playerboard" value="13"></button>
+            <button class="playerboard" value="14"></button>
+            <button class="playerboard" value="15"></button>
+            <button class="playerboard" value="16"></button>
+            <button class="playerboard" value="17"></button>
+            <button class="playerboard" value="18"></button>
+            <button class="playerboard" value="19"></button>
+            <button class="playerboard" value="20"></button>
+            <button class="playerboard" value="21"></button>
+            <button class="playerboard" value="22"></button>
+            <button class="playerboard" value="23"></button>
+            <button class="playerboard" value="24"></button>
+            <button class="playerboard" value="25"></button>
+        </section>
 
     <script src="battleship.js"></script>
 </body>
