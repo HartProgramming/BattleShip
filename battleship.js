@@ -158,12 +158,15 @@ function startGame() {
             /* Button function to interact with grid */
             let guess = 10;
             let playerAmmo = document.querySelector("#playerammo");
-            let gameOver = document.querySelector("#gameover")
+            let gameOver = document.querySelector("#gameover");
+            let playerHits = document.querySelector("#playerhits");
             let hits = 0;
             let miss = 0;
+            let playerGuess = true;
             for (let btns of cpuBoard) {
                 btns.addEventListener("click", function () {
                     guess = guess - 1;
+                    miss = miss + 1;
                     playerAmmo.textContent = guess;
                     let head = document.querySelector("#playerstatus");
                     head.textContent
@@ -172,18 +175,25 @@ function startGame() {
                         gameOver.textContent = "GAME OVER!!!"
                     }
                     if (parseInt(btns.value) == loc1random) {
+                        playerGuess = false;
+                        playerHits.textContent = hits;
+
+                        hits = hits + 1;
                         btns.classList.add("hit1");
                         head.textContent = "HIT!";
                     } else if (two.includes(parseInt(btns.value))) {
+                        playerGuess = false;
                         btns.classList.add("hit2");
                         head.textContent = "HIT!";
                     } else if (three.includes(parseInt(btns.value))) {
+                        playerGuess = false;
                         btns.classList.add("hit3");
                         head.textContent = "HIT!"
 
-                    } else {
+                    } else if (!three.includes(parseInt(btns.value)) || !two.includes(parseInt(btns.value)) || parseInt(btns.value) !== loc1random) {
                         btns.classList.add("miss");
-                        head.textContent = "MISS!";
+                        head.textContent = "player won";
+                    } else if (playerGuess === false) {
 
                     }
                 })
@@ -227,58 +237,60 @@ for (let x of playerBoard) {
         ship3.disabled = true;
         x.disabled = false;
     })
-    function shipSetting(){
-    if (shipClicks1 === 1) {
-        x.classList.add("ship1");
-        shipClicks1 -= 1;
-        common = x.value;
-        if (shipClicks1 === 0) {
-            x.disabled = true;
-        }
-    } else if (shipClicks2 === 2) {
-        x.classList.add("ship2");
-        x.value
-        shipClicks2 -= 1;
-        x.disabled = false;
-    } else if (shipClicks2 == 1) {
-        x.disabled = false;
-        x.value
-        x.classList.add("ship2");
-        shipClicks2 -= 1;
-        if (shipClicks2 === 0) {
-            x.disabled = true;
-        }
-    } else if (shipClicks3 === 3) {
-        x.classList.add("ship3");
-        shipClicks3 -= 1;
-        x.value
-        x.disabled = false;
-    } else if (shipClicks3 === 2) {
-        x.classList.add("ship3");
-        shipClicks3 -= 1;
-        x.value
-        x.disabled = false;
-    } else if (shipClicks3 === 1) {
-        x.classList.add("ship3");
-        shipClicks3 -= 1;
-        x.disabled = false;
-        if (shipClicks3 === 0) {
-            x.disabled = true;
+    function shipSetting() {
+        if (shipClicks1 === 1) {
+            x.classList.add("ship1");
+            shipClicks1 -= 1;
+            common = x.value;
+            if (shipClicks1 === 0) {
+                x.disabled = true;
+            }
+        } else if (shipClicks2 === 2) {
+            x.classList.add("ship2");
+            x.value
+            shipClicks2 -= 1;
+            x.disabled = false;
+        } else if (shipClicks2 == 1) {
+            x.disabled = false;
+            x.value
+            x.classList.add("ship2");
+            shipClicks2 -= 1;
+            if (shipClicks2 === 0) {
+                x.disabled = true;
+            }
+        } else if (shipClicks3 === 3) {
+            x.classList.add("ship3");
+            shipClicks3 -= 1;
+            x.value
+            x.disabled = false;
+        } else if (shipClicks3 === 2) {
+            x.classList.add("ship3");
+            shipClicks3 -= 1;
+            x.value
+            x.disabled = false;
+        } else if (shipClicks3 === 1) {
+            x.classList.add("ship3");
+            shipClicks3 -= 1;
+            x.disabled = false;
+            if (shipClicks3 === 0) {
+                x.disabled = true;
+            }
         }
     }
-}
     x.addEventListener("click", function () {
         shipSetting()
     })
-    function cpuGuess(){
+    function cpuGuess() {
         shipSetting()
         startTimer()
         interval = setInterval(deduct, 1000)
-        if(timer === true){
-            console.log("hello")
-        }
         computerGuess = floor()
-        console.log(computerGuess)
+        for (let cpuValue of playerBoard) {
+            if (computerGuess === cpuValue.value) {
+                console.log(cpuValue.value)
+            }
+        }
+
     }
 }
 cpuGuess()
@@ -286,25 +298,25 @@ startGame();
 
 /* Timer function for Cpu guess */
 
-    function deduct() {
-        timer = true;
-        time = time - 1;
-        countDown.textContent = time;
-        if (time === 0) {
-            clearInterval(interval)
-            timer = false;
-        }
+function deduct() {
+    timer = true;
+    time = time - 1;
+    countDown.textContent = time;
+    if (time === 0) {
+        clearInterval(interval)
+        timer = false;
     }
-    function cpuTimer(){
-        time = 4;
-        deduct()
+}
+function cpuTimer() {
+    time = 4;
+    deduct()
+}
+function startTimer() {
+    timer = true;
+    cpuTimer()
+    if (time === 0) {
+        timer = false;
+        console.log("fuck")
     }
-    function startTimer(){
-        timer = true;
-        time;
-        cpuTimer()
-        if(time === 0){
-            console.log("fuck")
-        }
-    }
+}
 
